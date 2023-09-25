@@ -36,8 +36,12 @@ export default function UserQuiz() {
       <div className="flex justify-center items-center ">
       {taskList && taskList.length > 0 ? taskList.map((x: any)=>(
            <div key={x.id} className="rounded bg-white drop-shadow-xl my-2 px-5 py-2 bg-blue-900/[0.3] px-10">
-              <h1 className="text-3xl">{x.quizName}</h1>
-              <p>{x.assignee}</p>
+              <h1 className="text-3xl">{x.question}</h1>
+              <div>
+              <div>{x.option1}</div>
+              <div>{x.option2}</div>
+              <div>{x.Options}</div>
+              </div>
             </div>
           ))
           :
