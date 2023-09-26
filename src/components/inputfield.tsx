@@ -1,5 +1,5 @@
 type propsType = {
-    label: string;
+    label?: string;
     onChange?: (...args: any[]) => any;
     type?: string;
     value?: any;

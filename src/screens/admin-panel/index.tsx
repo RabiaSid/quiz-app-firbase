@@ -5,24 +5,38 @@ import Button from "../../components/button";
 
 export default function AdminPanel() {
   const [disable, setDisable] = useState(false);
-  // const [taskList, setTaskList] = useState<any>();
+  const [text, setText] = useState("");
+  const [list, setList] = useState<any>([]);
   const [model, setModel] = useState<any>({
     quizName: "",
     quizDurationInmin: "",
     secretKey: "",
     quizOpen: "",
     description: "",
-    question: "",
-    addMoreOption: "",
-    option1: "",
-    correctOption: "",
-    option2: "",
-    options: [],
+    questions: [
+      {
+        question: "",
+        options: {
+          option1: "",
+          option2: "",
+        },
+        correctOption: "",
+      },
+    ],
   });
 
   const fillModel = (key: string, val: any) => {
     model[key] = val;
     setModel({ ...model });
+  };
+
+  let addItem = () => {
+    if (text.trim() !== "") {
+      setList([...list, { text }]);
+      setText("");
+    } else {
+      alert("Please enter a non-empty todo x.");
+    }
   };
 
   const AddTask = () => {
@@ -31,31 +45,26 @@ export default function AdminPanel() {
         console.log(res);
         setModel({
           ...model,
-        quizName: "",
-        quizDurationInmin: "",
-        secretKey: "",
-        quizOpen: "",
-        description: "",
-        question: "",
-        correctOption: "",
-        addMoreOption: "",
+          quizName: "",
+          quizDurationInmin: "",
+          secretKey: "",
+          quizOpen: "",
+          description: "",
+          questions: [
+            {
+              question: "",
+              options: {
+                option1: "",
+                option2: "",
+              },
+              correctOption: "",
+            },
+          ],
         });
       })
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const AddMoreTask = () => {
-    const { addMoreOption, options } = model;
-    if (addMoreOption.trim() !== "") {
-      // Add the new option to the options array
-      setModel({
-        ...model,
-        addMoreOption: "", // Clear the input field
-        options: [...options, addMoreOption],
-      });
-    }
   };
 
   return (
@@ -127,79 +136,64 @@ export default function AdminPanel() {
             </div>
           </div>
           <div className="py-2">
-            <InputField
-              value={model.question}
-              onChange={(e: any) => fillModel("question", e.target.value)}
-              label="Question"
-            />
+            <div>
+              <div className="py-2">
+                <InputField
+                  value={model.question}
+                  onChange={(e: any) => fillModel("question", e.target.value)}
+                  label="Question"
+                />
+              </div>
+            </div>
           </div>
           <div className="grid grid-cols-4 ">
             <div className="col-span-3 pe-2">
               <InputField
-                value={model.addMoreOption}
-                onChange={(e: any) =>
-                  fillModel("addMoreOption", e.target.value)
-                }
+                value={text}
+                onChange={(e) => {
+                  setText(e.target.value);
+                }}
                 label="Option"
               />
             </div>
-            <Button onClick={AddMoreTask} label="Add More Option" />
+            <Button label="Add More Option" onClick={addItem} />
           </div>
+
           <div className="grid grid-cols-4 py-2">
             <div className="col-span-3 pe-2">
-              <div className="grid grid-cols-2 py-1 ">
-                <div className="px-1">
-                  <InputField
-                    value={model.option1}
-                    onChange={(e: any) => fillModel("option1", e.target.value)}
-                    label="Option 1"
+              <div className="py-2">
+                <InputField
+                  value={model.option1}
+                  onChange={(e: any) => fillModel("option1", e.target.value)}
+                  label="option 1"
+                />
+              </div>
+              <div className="py-2">
+                <InputField
+                  value={model.option2}
+                  onChange={(e: any) => fillModel("option2", e.target.value)}
+                  label="option 2"
+                />
+                {list.map((x: any, i: any) => (
+                   <InputField
+                    key={i}
+                    type="text"
+                    value={x.text}
+                    label={"option" + i + 3}
+                    // className="edit_input w-100"
+                    onChange={(e: any) => fillModel( i, e.target.value)}
                   />
-                </div>
-                <div className="px-1">
-                  <InputField
-                    value={model.option2}
-                    onChange={(e: any) => fillModel("option2", e.target.value)}
-                    label="Option 2"
-                  />
-                </div>
-                {model.options.map((x: any, i: any) => (
-                  <div className="px-1" key={i}>
-                    <InputField
-                      value={model.x}
-                      onChange={(e: any) => {
-                        const NewOptions = [...model.options];
-                        NewOptions[i] = e.target.value;
-                        setModel({
-                          ...model,
-                          options: NewOptions,
-                        })
-                        fillModel(`NewOptions[i]`, e.target.value)
-                        ;
-
-                        
-                      }}
-                      // onChange={(e: any) => {
-                      //   const updatedOptions = [...model.options];
-                      //   updatedOptions[i] = e.target.value;
-                      //   setModel({
-                      //     ...model,
-                      //     options: updatedOptions,
-                      //   });
-                      // }}
-                      label={`option ${i + 3}`}
-                    />
-                  </div>
                 ))}
               </div>
-              {/* <div className="grid grid-cols-2 space-x-1 py-1">
-                
-              </div> */}
             </div>
             <InputField
               value={model.correctOption}
               onChange={(e: any) => fillModel("correctOption", e.target.value)}
-              label="correct : Option"
+              label="correct : option "
             />
+          </div>
+          <div className="grid grid-cols-4 ">
+            <Button label="Save Question" />
           </div>
         </div>
       </div>
