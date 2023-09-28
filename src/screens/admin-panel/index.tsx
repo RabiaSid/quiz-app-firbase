@@ -31,9 +31,13 @@ export default function AdminPanel() {
   const addOption = () => {
     optionList.push(option);
     setoptionList([...optionList]);
+    setoption("")
   };
 
   const AddQuiz = () => {
+    quizModel.questions = [...questions]
+    console.log(quizModel)
+    setDisable(false)
     fbAdd("quiz", quizModel)
       .then((res: any) => {
         console.log(res);
@@ -60,7 +64,8 @@ export default function AdminPanel() {
     setQuestions([...questions]);
     setQuestionModel({});
     setCorrectOption("");
-    setoption([]);
+    setoptionList([]);
+    setoption("")
   };
 
   return (
@@ -79,7 +84,7 @@ export default function AdminPanel() {
           <div className="grid grid-cols-3 gap-4">
             <div className="py-2">
               <InputField
-                value={quizModel.quizName}
+                value={quizModel.quizName || ""}
                 onChange={(e: any) => fillQuizModel("quizName", e.target.value)}
                 disabled={disable}
                 label="Quiz Name"
@@ -87,7 +92,7 @@ export default function AdminPanel() {
             </div>
             <div className="py-2">
               <InputField
-                value={quizModel.quizDurationInmin}
+                value={quizModel.quizDurationInmin || ""}
                 onChange={(e: any) =>
                   fillQuizModel("quizDurationInmin", e.target.value)
                 }
@@ -97,7 +102,7 @@ export default function AdminPanel() {
             </div>
             <div className="py-2">
               <InputField
-                value={quizModel.secretKey}
+                value={quizModel.secretKey || ""}
                 onChange={(e: any) =>
                   fillQuizModel("secretKey", e.target.value)
                 }
@@ -109,7 +114,7 @@ export default function AdminPanel() {
           <div className="grid grid-cols-3 gap-4">
             <div className="py-2">
               <InputField
-                value={quizModel.quizOpen}
+                value={quizModel.quizOpen || ""}
                 onChange={(e: any) => fillQuizModel("quizOpen", e.target.value)}
                 label="Quiz Open"
                 disabled={disable}
@@ -117,7 +122,7 @@ export default function AdminPanel() {
             </div>
             <div className="py-2">
               <InputField
-                value={quizModel.description}
+                value={quizModel.description || ""}
                 onChange={(e: any) =>
                   fillQuizModel("description", e.target.value)
                 }
@@ -135,7 +140,7 @@ export default function AdminPanel() {
             <div>
               <div className="py-2">
                 <InputField
-                  value={questionModel.question}
+                  value={questionModel.question || ""}
                   onChange={(e: any) =>
                     fillQuestionModel("question", e.target.value)
                   }

@@ -4,7 +4,7 @@ import InputField from "../../components/inputfield";
 import Button from "../../components/button";
 
 export default function UserQuiz() {
-  const [taskList, setTaskList] = useState<any>();
+  const [taskList, setTaskList] = useState<any>([]);
   const [isTrue, setIsTrue] = useState(true);
   const [model, setModel] = useState<any>({ secretInput: "" });
 
@@ -14,7 +14,7 @@ export default function UserQuiz() {
   };
 
   const GetTask = () => {
-    fbGet("tasks")
+    fbGet("quiz")
       .then((res: any) => {
         console.log(res);
         setTaskList([...res]);
@@ -31,8 +31,8 @@ export default function UserQuiz() {
   return (
     <>
       {taskList && taskList.length > 0
-        ? taskList.map((x: any) => (
-            <div>
+        ? taskList.map((x: any, i: any) => (
+            <div key={i}>
               {isTrue ? (
                 <>
                   <div className="bg-primary h-screen flex justify-center items-center">
