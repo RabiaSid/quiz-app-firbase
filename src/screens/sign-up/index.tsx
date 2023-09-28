@@ -10,6 +10,7 @@ export default function Signup() {
     fullname:"",
     email: "",
     password: "",
+    // role:""
   });
 
   const fillModel = (key: string, val: any) => {
@@ -20,9 +21,15 @@ export default function Signup() {
   const navigate = useNavigate();
 
   let signUpUser = () => {
+    // model.role = "admin"
     console.log(model);
     fbSignUp(model)
       .then((res) => {
+        // if(model.role == "admin"){
+        //   navigate("/admin-panel")
+        // }else{
+        //   navigate("/user-quiz")
+        // }
         navigate("/sign-in");
       })
       .catch((err) => {
@@ -65,6 +72,13 @@ export default function Signup() {
               label="Password"
             />
           </div>
+          {/* <div className="py-3">
+            <InputField
+              value={model.role}
+              onChange={(e: any) => fillModel("role", e.target.value)}
+              label="Role"
+            />
+          </div> */}
           <div className="py-3">
             <Button onClick={signUpUser} label="Sign Up" />
           </div>
