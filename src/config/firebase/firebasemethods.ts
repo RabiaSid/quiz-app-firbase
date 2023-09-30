@@ -3,7 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut
+  signOut,
 } from "firebase/auth";
 import { getDatabase, ref, set, onValue, push } from "firebase/database";
 import { app } from "./firebaseconfig";
@@ -80,8 +80,8 @@ export let fbAuth = () => {
 };
 export let fbAdd = (nodeName: string, body: any, id?: string) => {
   return new Promise((resolve, reject) => {
-    const TaskId = push(ref(db, `${nodeName}/`)).key;
-    body.id = TaskId;
+    const id = push(ref(db, `${nodeName}/`)).key;
+    body.id = id;
     const referece = ref(db, `${nodeName}/${body.id}`);
     set(referece, body)
       .then((res) => {
@@ -109,5 +109,5 @@ export let fbDelete = () => {};
 export let fbEdit = () => {};
 export let fbGetById = () => {};
 export let fblogout = () => {
-  return signOut(auth)
+  return signOut(auth);
 };
