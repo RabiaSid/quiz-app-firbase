@@ -9,6 +9,10 @@ export default function UserQuiz() {
   const [activeQuiz, setActiveQuiz] = useState<any>(null);
   const [isTrue, setIsTrue] = useState(true);
   const [model, setModel] = useState<any>({ secretInput: "" });
+  const [answered, setAnswered] = useState<any>([]);
+  const [count, setCount] = useState<any>(1)
+  const [answerSelected, setAnswerSelected] = useState(false);
+
 
   const fillModel = (key: string, val: any) => {
     model[key] = val;
@@ -44,6 +48,10 @@ export default function UserQuiz() {
       setActiveQuiz(null);
     }
   };
+
+  const setResult = () => {
+
+  }
 
   return (
     <>
@@ -94,6 +102,11 @@ export default function UserQuiz() {
                     Description: {activeQuiz.description}
                   </h3>
                 </div>
+                {answerSelected && (
+                <div className="grid grid-cols-3 mt-2">
+                 <Button onClick={setResult} label="submit" />
+                </div>
+                )}
               </div>
             </div>
 
@@ -117,6 +130,23 @@ export default function UserQuiz() {
                             <div className="grid grid-cols-1  m-0" key={j}>
                               <Button 
                               label={option}
+                              onClick={() => {
+                                console.log(answered.length)
+                                if (question.correctOption !== option) {
+                                  // console.log("wrong answer");
+                                } else {
+                                  if (!answered[i]) {
+                                    setCount(count + 1);
+                                    // console.log(count)
+                                    const confirmAnswer = [...answered];
+                                    confirmAnswer[i] = true;
+                                    setAnswered(confirmAnswer);
+                                    // console.log(confirmAnswer.length)
+                                    console.log("correct answer");
+                                  }
+                                  setAnswerSelected(true);
+                                }
+                              }}
                               />
                             </div>
                           ))
