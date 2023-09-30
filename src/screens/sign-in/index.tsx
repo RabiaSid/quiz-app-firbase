@@ -9,6 +9,7 @@ export default function SignIn() {
   const [model, setModel] = useState<any>({
       email: "",
       password: "",
+      // role:""
   });
 
   const fillModel = (key: string, val: any) => {
@@ -19,9 +20,14 @@ export default function SignIn() {
   let LoginUser = () => {
     console.log(model);
     fbLogin(model)
-      .then((res) => {
+      .then((res: any) => {
         console.log(res);
-        navigate("/admin-panel");
+        if(res.role == "admin"){
+          navigate("/admin-panel")
+        }else{
+          navigate("/user-quiz")
+        }
+        // navigate("/admin-panel");
       })
       .catch((err) => {
         console.log(err);

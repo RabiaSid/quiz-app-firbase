@@ -10,7 +10,7 @@ export default function Signup() {
     fullname:"",
     email: "",
     password: "",
-    // role:""
+    role:""
   });
 
   const fillModel = (key: string, val: any) => {
@@ -21,16 +21,15 @@ export default function Signup() {
   const navigate = useNavigate();
 
   let signUpUser = () => {
-    // model.role = "admin"
     console.log(model);
     fbSignUp(model)
-      .then((res) => {
-        // if(model.role == "admin"){
-        //   navigate("/admin-panel")
-        // }else{
-        //   navigate("/user-quiz")
-        // }
-        navigate("/sign-in");
+      .then((res :any) => {
+        if(res.role == "admin"){
+          navigate("/admin-panel")
+        }else{
+          navigate("/user-quiz")
+        }
+        // navigate("/sign-in");
       })
       .catch((err) => {
         console.log(err);
