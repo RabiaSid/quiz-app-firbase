@@ -105,9 +105,12 @@ export let fbGet = (nodeName: string, id?: string) => {
     });
   });
 };
-export let fbDelete = () => {};
-export let fbEdit = () => {};
-export let fbGetById = () => {};
+
 export let fblogout = () => {
   return signOut(auth);
 };
+
+export let fbDelete = () => {};
+export let fbEdit = () => {};
+export let fbGetById = () => {};
+
