@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { fbAdd, fbGet } from "../../config/firebase/firebasemethods";
+import { fbAdd, fbGet, fblogout } from "../../config/firebase/firebasemethods";
 import InputField from "../../components/inputfield";
 import Button from "../../components/button";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminPanel() {
+  const navigate = useNavigate();
   const [disable, setDisable] = useState(false);
   const [optionList, setoptionList] = useState<any>([]);
   const [correctOption, setCorrectOption] = useState<any>();
@@ -32,6 +34,11 @@ export default function AdminPanel() {
     optionList.push(option);
     setoptionList([...optionList]);
     setoption("")
+  };
+  const logOut = () => {
+    fblogout().then(() => {
+      navigate("/sign-in")
+    })
   };
 
   const AddQuiz = () => {
@@ -72,7 +79,7 @@ export default function AdminPanel() {
     <>
       <div className="grid grid-cols-4 h-screen">
         <div className="p-10 bg-[#525659]">
-          <div></div>
+          <div><Button onClick={logOut}  label="logout" /></div>
         </div>
         <div className="p-10 col-span-3">
           <div className="grid grid-cols-4 ">

@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut
 } from "firebase/auth";
 import { getDatabase, ref, set, onValue, push } from "firebase/database";
 import { app } from "./firebaseconfig";
@@ -107,3 +108,6 @@ export let fbGet = (nodeName: string, id?: string) => {
 export let fbDelete = () => {};
 export let fbEdit = () => {};
 export let fbGetById = () => {};
+export let fblogout = () => {
+  return signOut(auth)
+};
