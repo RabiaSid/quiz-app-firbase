@@ -18,7 +18,6 @@ export default function SignIn() {
   };
 
   let LoginUser = () => {
-    // e.preventDefault();
     console.log(model);
     fbLogin(model)
       .then((res: any) => {
@@ -28,7 +27,6 @@ export default function SignIn() {
         }else{
           navigate("/user-quiz")
         }
-        // navigate("/admin-panel");
       })
       .catch((err) => {
         console.log(err);
