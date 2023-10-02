@@ -178,7 +178,6 @@ export default function UserQuiz() {
                               <Button
                                 label={option}
                                 onClick={() => {
-                                  // console.log(answered.length)
                                   if (question.correctOption !== option) {
                                     console.log("wrong answer");
                                   } else {
@@ -188,7 +187,6 @@ export default function UserQuiz() {
                                       const confirmAnswer = [...answered];
                                       confirmAnswer[i] = true;
                                       setAnswered(confirmAnswer);
-                                      // console.log(confirmAnswer.length)
                                       console.log("correct answer");
                                     }
                                     setAnswerSelected(true);
