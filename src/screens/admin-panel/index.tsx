@@ -34,18 +34,18 @@ export default function AdminPanel() {
   const addOption = () => {
     optionList.push(option);
     setoptionList([...optionList]);
-    setoption("")
+    setoption("");
   };
   const logOut = () => {
     fblogout().then(() => {
-      navigate("/sign-in")
-    })
+      navigate("/sign-in");
+    });
   };
 
   const AddQuiz = () => {
-    quizModel.questions = [...questions]
-    console.log(quizModel)
-    setDisable(false)
+    quizModel.questions = [...questions];
+    console.log(quizModel);
+    setDisable(false);
     fbAdd("quiz", quizModel)
       .then((res: any) => {
         console.log(res);
@@ -73,39 +73,31 @@ export default function AdminPanel() {
     setQuestionModel({});
     setCorrectOption("");
     setoptionList([]);
-    setoption("")
+    setoption("");
   };
 
   return (
     <>
       <div className="grid grid-cols-4 h-screen">
         <div className="p-10 bg-[#525659]">
-          <div className="flex justify-center"><img src={profile} width="150vw" /></div>
+          <div className="flex justify-center">
+            <img src={profile} width="150vw" />
+          </div>
           <div className="py-2">
-              <InputField
-              disabled={true}
-              label="HTML"
-              />
-            </div>
-            <div className="py-2">
-              <InputField
-              disabled={true}
-              label="CSS"
-              />
-            </div>
-            <div className="py-2">
-              <InputField
-              disabled={true}
-              label="JS Quiz 1"
-              />
-            </div>
-            <div className="py-2">
-              <InputField
-              disabled={true}
-              label="JS Quiz 2"
-              />
-            </div>
-          <div><Button onClick={logOut}  label="logout" /></div>
+            <InputField disabled={true} label="HTML" />
+          </div>
+          <div className="py-2">
+            <InputField disabled={true} label="CSS" />
+          </div>
+          <div className="py-2">
+            <InputField disabled={true} label="JS Quiz 1" />
+          </div>
+          <div className="py-2">
+            <InputField disabled={true} label="JS Quiz 2" />
+          </div>
+          <div>
+            <Button onClick={logOut} label="logout" />
+          </div>
         </div>
         <div className="p-10 col-span-3">
           <div className="grid grid-cols-4 ">
@@ -170,17 +162,13 @@ export default function AdminPanel() {
             </div>
           </div>
           <div className="py-2">
-            <div>
-              <div className="py-2">
-                <InputField
-                  value={questionModel.question || ""}
-                  onChange={(e: any) =>
-                    fillQuestionModel("question", e.target.value)
-                  }
-                  label="Question"
-                />
-              </div>
-            </div>
+            <InputField
+              value={questionModel.question || ""}
+              onChange={(e: any) =>
+                fillQuestionModel("question", e.target.value)
+              }
+              label="Question"
+            />
           </div>
 
           <div className="grid grid-cols-4 ">
@@ -212,6 +200,19 @@ export default function AdminPanel() {
           </div>
           <div className="grid grid-cols-4 ">
             <Button label="Save Question" onClick={addQuestion} />
+          </div>
+          <div className="grid grid-cols-1 ">
+            <div className="grid grid-cols-1">
+            <h1 className="text-2xl italic py-3">Quiz App Admin</h1>
+            </div>
+            <div className="grid grid-cols-6 ">
+              <div className="me-3">
+                <Button label="Edit" />
+              </div>
+              <div>
+                <Button label="Delete" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
