@@ -3,6 +3,7 @@ import { fbAdd, fbGet, fblogout } from "../../config/firebase/firebasemethods";
 import InputField from "../../components/inputfield";
 import Button from "../../components/button";
 import { useNavigate } from "react-router-dom";
+import { profile } from "../../assets";
 
 export default function AdminPanel() {
   const navigate = useNavigate();
@@ -79,6 +80,31 @@ export default function AdminPanel() {
     <>
       <div className="grid grid-cols-4 h-screen">
         <div className="p-10 bg-[#525659]">
+          <div className="flex justify-center"><img src={profile} width="150vw" /></div>
+          <div className="py-2">
+              <InputField
+              disabled={true}
+              label="HTML"
+              />
+            </div>
+            <div className="py-2">
+              <InputField
+              disabled={true}
+              label="CSS"
+              />
+            </div>
+            <div className="py-2">
+              <InputField
+              disabled={true}
+              label="JS Quiz 1"
+              />
+            </div>
+            <div className="py-2">
+              <InputField
+              disabled={true}
+              label="JS Quiz 2"
+              />
+            </div>
           <div><Button onClick={logOut}  label="logout" /></div>
         </div>
         <div className="p-10 col-span-3">
