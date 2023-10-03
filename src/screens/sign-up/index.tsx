@@ -24,7 +24,7 @@ export default function Signup() {
     console.log(model);
     fbSignUp(model)
       .then((res :any) => {
-        if(res.role == "admin"){
+        if(res.role == "user"){
           navigate("/admin-panel")
         }else{
           navigate("/user-quiz")

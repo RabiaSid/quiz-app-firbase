@@ -14,6 +14,7 @@ export default function UserQuiz() {
   const [answerSelected, setAnswerSelected] = useState<any>(false);
   const [showSelected, setShowSelected] = useState<any>(false);
   const [showModal, setShowModal] = useState<any>(false);
+  const [disable, setDisable] = useState(false);
 
   const fillModel = (key: string, val: any) => {
     model[key] = val;
@@ -43,7 +44,7 @@ export default function UserQuiz() {
     if (quizToShow) {
       setActiveQuiz(quizToShow);
       setQuestionList([...quizToShow.questions]);
-      console.log([...quizToShow.questions]);
+      // console.log([...quizToShow.questions]);
       setIsTrue(false);
     } else {
       setActiveQuiz(null);
@@ -53,6 +54,7 @@ export default function UserQuiz() {
   const setResult = () => {
     setAnswerSelected(false);
     setShowSelected(true);
+    setDisable(true)
   };
 
   const showResult = () => {
@@ -60,7 +62,10 @@ export default function UserQuiz() {
     setShowSelected(true);
   };
 
-  const totalMarks = (questionList.length / count) * 10;
+  const totalMarks = questionList.length  * 10;
+  console.log(count)
+  // console.log(questionList.length)
+
 
   return (
     <>
@@ -177,17 +182,18 @@ export default function UserQuiz() {
                             <div className="grid grid-cols-1  m-0" key={j}>
                               <Button
                                 label={option}
+                                disabled={disable}
                                 onClick={() => {
                                   if (question.correctOption !== option) {
-                                    console.log("wrong answer");
+                                    // console.log("wrong answer");
                                   } else {
                                     if (!answered[i]) {
                                       setCount(count + 1);
-                                      console.log(count);
+                                      // console.log(count);
                                       const confirmAnswer = [...answered];
                                       confirmAnswer[i] = true;
                                       setAnswered(confirmAnswer);
-                                      console.log("correct answer");
+                                      // console.log("correct answer");
                                     }
                                     setAnswerSelected(true);
                                   }
