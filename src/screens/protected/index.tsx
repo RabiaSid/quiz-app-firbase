@@ -16,9 +16,9 @@ export default function Protected(props: any) {
     setLoader(true);
     fbAuth()
       .then((res) => {
-        setTimeout(() => {
+        // setTimeout(() => {
         setLoader(false);
-        }, 2000);
+        // }, 2000);
       })
       .catch((err) => {
         setLoader(false);
