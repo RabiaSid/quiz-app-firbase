@@ -44,7 +44,6 @@ export default function UserQuiz() {
     if (quizToShow) {
       setActiveQuiz(quizToShow);
       setQuestionList([...quizToShow.questions]);
-      // console.log([...quizToShow.questions]);
       setIsTrue(false);
     } else {
       setActiveQuiz(null);
@@ -63,8 +62,6 @@ export default function UserQuiz() {
   };
 
   const totalMarks = questionList.length  * 10;
-  console.log(count)
-  // console.log(questionList.length)
 
 
   return (
@@ -185,15 +182,15 @@ export default function UserQuiz() {
                                 disabled={disable}
                                 onClick={() => {
                                   if (question.correctOption !== option) {
-                                    // console.log("wrong answer");
+                                    console.log("wrong answer");
                                   } else {
                                     if (!answered[i]) {
                                       setCount(count + 1);
-                                      // console.log(count);
+                                      console.log(count);
                                       const confirmAnswer = [...answered];
                                       confirmAnswer[i] = true;
                                       setAnswered(confirmAnswer);
-                                      // console.log("correct answer");
+                                      console.log("correct answer");
                                     }
                                     setAnswerSelected(true);
                                   }

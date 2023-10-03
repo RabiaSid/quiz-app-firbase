@@ -64,7 +64,7 @@ export default function SignIn() {
           <div className="py-3">
             <p className="text-white">
               not account?
-              <Link to="/sign-up"> Sign up </Link>
+              <Link to="/"> Sign up </Link>
             </p>
           </div>
         </div>
