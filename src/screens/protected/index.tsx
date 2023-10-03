@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { fbAuth } from "../../config/firebase/firebasemethods";
 import { loading } from "../../assets";
 
+
+
 export default function Protected(props: any) {
   const { Screen } = props;
   const [loader, setLoader] = useState(true);
@@ -16,9 +18,9 @@ export default function Protected(props: any) {
     setLoader(true);
     fbAuth()
       .then((res) => {
-        // setTimeout(() => {
+        setTimeout(() => {
         setLoader(false);
-        // }, 2000);
+        }, 1000);
       })
       .catch((err) => {
         setLoader(false);
