@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fbAuth } from "../../config/firebase/firebasemethods";
+import { loading } from "../../assets";
 
 export default function Protected(props: any) {
   const { Screen } = props;
@@ -11,12 +12,13 @@ export default function Protected(props: any) {
     checkAuth();
   }, []);
 
-  
   let checkAuth = () => {
     setLoader(true);
     fbAuth()
       .then((res) => {
+        setTimeout(() => {
         setLoader(false);
+        }, 2000);
       })
       .catch((err) => {
         setLoader(false);
@@ -24,9 +26,11 @@ export default function Protected(props: any) {
       });
   };
   return loader ? (
-    <>
-      <h1>loading</h1>
-    </>
+    <div className="bg-[#1c273a] h-screen flex justify-center items-center">
+      <div className="w-[300px] bg-[rgb(28, 39, 58)] p-10 rounded-lg">
+        <img src={loading} />
+      </div>
+    </div>
   ) : (
     <Screen />
   );
