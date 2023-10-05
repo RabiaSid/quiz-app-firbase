@@ -203,7 +203,7 @@ export default function AdminPanel() {
           </div>
           <div className="grid grid-cols-1 ">
             <div className="grid grid-cols-1">
-            <h1 className="text-2xl italic py-3">Quiz App Admin</h1>
+              <h1 className="text-2xl italic py-3">Quiz App Admin</h1>
             </div>
             <div className="grid grid-cols-6 ">
               <div className="me-3">

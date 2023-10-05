@@ -3,8 +3,11 @@ import { fbLogin } from "../../config/firebase/firebasemethods";
 import InputField from "../../components/inputfield";
 import Button from "../../components/button";
 import { Link, useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux"
+import { add } from "../../config/redux/reducers/userSlice";
 
 export default function SignIn() {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [model, setModel] = useState<any>({
       email: "",
@@ -21,12 +24,16 @@ export default function SignIn() {
     console.log(model);
     fbLogin(model)
       .then((res: any) => {
-        console.log(res);
-        if(res.role == "admin"){
-          navigate("/admin-panel")
-        }else{
-          navigate("/user-quiz")
-        }
+        console.log(res)
+        dispatch(add({...res}))
+        console.log(add({...res}))
+        navigate("/student")
+        // console.log(res);
+        // if(res.role == "admin"){
+        //   navigate("/admin-panel")
+        // }else{
+        //   navigate("/user-quiz")
+        // }
       })
       .catch((err) => {
         console.log(err);
