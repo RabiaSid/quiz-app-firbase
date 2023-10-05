@@ -30,6 +30,11 @@ export default function AppHome() {
           disabled={isLoading}
           label="go for Sign-up"
         />
+        <Button
+          onClick={() => navigate("/student")}
+          disabled={isLoading}
+          label="student"
+        />
       </div>
     </div>
   );
